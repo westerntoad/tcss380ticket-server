@@ -2,7 +2,7 @@ import express, { Express, Request, Response } from 'express';
 
 import cors from 'cors';
 
-//import { routes } from './routes';
+import { routes } from './routes';
 
 const app: Express = express();
 
@@ -10,12 +10,10 @@ const PORT: number = parseInt(process.env.PORT) || 4001;
 
 app.use(cors());
 
-/*
- * This middleware function parses JASON in the body of POST requests
- */
-app.use(express.json());
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-//app.use(routes);
+app.use(routes);
 
 app.get('/', (request: Request, response: Response) => {
     response.send('<html><h1>testing</h1></html>');
